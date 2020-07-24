@@ -1,5 +1,5 @@
 default:
-	hugo --minify
+	hugo --gc --minify
 
 server:
 	hugo server -D
