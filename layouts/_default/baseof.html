@@ -12,7 +12,7 @@
             <ul class="o-nav__list">
                 {{ $currentPage := . }}
                 {{ range .Site.Menus.main }}
-                    <li class="o-nav__item"><a href="{{ .URL }}" class="o-nav__link{{ if eq .URL $currentPage.URL }} o-nav__link--active{{ end }}">{{ .Name }}</a>
+                    <li class="o-nav__item"><a href="{{ .URL }}" class="o-nav__link{{ if eq .URL $currentPage.RelPermalink }} o-nav__link--active{{ end }}">{{ .Name }}</a>
                     </li>
                 {{ end }}
             </ul>
