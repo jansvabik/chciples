@@ -10,14 +10,11 @@
         </button>
         <nav class="o-nav">
             <ul class="o-nav__list">
-                <li class="o-nav__item"><a href="/" class="o-nav__link o-nav__link--active">Organizace plesů</a>
-                </li>
-                <li class="o-nav__item"><a href="/#zaridime" class="o-nav__link">Co zařídíme</a>
-                </li>
-                <li class="o-nav__item"><a href="#" class="o-nav__link">Zkušenosti</a>
-                </li>
-                <li class="o-nav__item"><a href="/kontakt/" class="o-nav__link">Kontakt</a>
-                </li>
+                {{ $currentPage := . }}
+                {{ range .Site.Menus.main }}
+                    <li class="o-nav__item"><a href="{{ .URL }}" class="o-nav__link{{ if eq .URL $currentPage.URL }} o-nav__link--active{{ end }}">{{ .Name }}</a>
+                    </li>
+                {{ end }}
             </ul>
         </nav>
     </header>

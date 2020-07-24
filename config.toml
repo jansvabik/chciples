@@ -7,3 +7,20 @@ title = "Chciples.cz"
     lang = "cs"
     locale = "cs_CZ"
     gatag = "UA-53675598-6"
+
+[menu]
+    [[menu.main]]
+        url = "/"
+        name = "Organizace plesů"
+        weight = 1
+    [[menu.main]]
+        url = "/#zaridime"
+        name = "Co zařídíme"
+        weight = 2
+    #[[menu.main]]
+    #    url = "/zkusenosti/"
+    #    name = "Zkušenosti"
+    [[menu.main]]
+        url = "/kontakt/"
+        name = "Kontakt"
+        weight = 3

@@ -7,10 +7,10 @@ seo:
   include_to_sitemap: true
   canonical: '/kontakt/'
   type: website
-menu:
-  include: true
-  title: 'Kontakt'
-  position: 4
+# menu:
+#   include: true
+#   title: 'Kontakt'
+#   position: 4
 mobilearrow:
   link: '#main'
   text: 'O kontaktu na organizátory plesů v ČR'

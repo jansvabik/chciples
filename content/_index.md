@@ -6,10 +6,10 @@ seo:
   description: 'Zorganizujeme vám výjimečný ples – ať už se jedná o reprezentační ples, maturitní ples, firemní ples či ples zcela jiný. Jsme organizace plesů v celé ČR.'
   include_to_sitemap: true
   type: website
-menu:
-  include: true
-  title: 'Organizace plesů'
-  position: 1
+# menu:
+#   include: true
+#   title: 'Organizace plesů'
+#   position: 1
 mobilearrow:
   link: '#reasons'
   text: 'Proč my?'
@@ -51,5 +51,5 @@ czechia:
     text: Zašlete nám nezávaznou poptávku
 inquiry:
   heading: Nezávazná poptávka
-  text: Poptávkový formulář pro vás momentálně připravujeme. Zatím můžete zavolat Vítkovi na <a href="tel:+420727911636">+420 727911636</a>, rád vás uslyší.
+  text: Poptávkový formulář pro vás momentálně připravujeme. Zatím můžete zavolat Vítkovi na <a href="tel:+420727911636">+420 727911636</a>, rád vás uslyší.  
 ---
