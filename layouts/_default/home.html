@@ -1,0 +1,48 @@
+{{ define "content" }}
+    <section id="reasons" class="c-reasons">
+        <h2 class="c-reasons__heading">{{ .Params.reasons.heading }}</h2>
+        <div class="c-reasons__row">
+            {{ range .Params.reasons.boxes }}
+                <div class="c-reasons__item c-reasons__item--icon-{{ .icon }}">
+                    <h3 class="c-reasons__item-heading">{{ .heading }}</h3>
+                    <p class="c-reasons__text">{{ .text }}
+                    </p>
+                    <a href="{{ .link.url }}" class="c-reasons__link">{{ .link.text }} →</a>
+                </div>
+            {{ end }}
+        </div>
+    </section>
+    <section class="c-last-prom">
+        <div class="c-last-prom__content">
+            <h2 class="c-last-prom__heading">{{ .Params.lastprom.heading }}</h2>
+            <p class="c-last-prom__text">{{ .Params.lastprom.text }}
+            </p>
+            <a href="{{ .Params.lastprom.link.url }}" class="c-last-prom__link">{{ .Params.lastprom.link.text }}</a>
+        </div>
+    </section>
+    <section id="zaridime" class="c-services">
+        <h2 class="c-services__heading">Co vše na váš ples zařídíme</h2>
+        <div class="c-services__list">
+            {{ $pages := where .Site.RegularPages "Type" "na-ples" }}
+            {{ range $pages.ByParam "boxdata.weight" }}
+                <a href="{{ .Permalink }}" class="c-services__item c-services__item--bg-{{ .Params.boxdata.image }}">
+                    <h3 class="c-services__item-name">{{ .Params.boxdata.heading }}</h3>
+                    <p class="c-services__item-text">{{ .Params.boxdata.text }}</p>
+                </a>
+            {{ end }}
+        </div>
+    </section>
+    <section class="c-allcz">
+        <div class="c-allcz__content">
+            <h2 class="c-allcz__heading">{{ .Params.czechia.heading }}</h2>
+            <p class="c-allcz__text">{{ .Params.czechia.text }}
+            </p>
+            <a href="{{ .Params.czechia.link.url }}" class="c-allcz__link">{{ .Params.czechia.link.text }}</a>
+        </div>
+    </section>
+    <section id="poptavka" class="c-services">
+        <h2 class="c-services__heading">{{ .Params.inquiry.heading }}</h2>
+        <p class="c-contact__text">{{ .Params.inquiry.text | safeHTML }}
+        </p>
+    </section>
+{{ end }}

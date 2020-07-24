@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Params.lang }}">
+{{ partial "head" . }}
+<body>
+    <header class="o-header">
+        <a href="/" class="o-header__logo"><img src="/images/logo.png" alt="Logo Chciples.cz" class="o-header__logoimage">
+        </a>
+        <button type="button" class="o-header__mobile-nav-button" id="mobile-nav-button">
+            <span class="sr-only">Zobrazit/skrýt navigaci</span>
+        </button>
+        <nav class="o-nav">
+            <ul class="o-nav__list">
+                <li class="o-nav__item"><a href="/" class="o-nav__link o-nav__link--active">Organizace plesů</a>
+                </li>
+                <li class="o-nav__item"><a href="/#zaridime" class="o-nav__link">Co zařídíme</a>
+                </li>
+                <li class="o-nav__item"><a href="#" class="o-nav__link">Zkušenosti</a>
+                </li>
+                <li class="o-nav__item"><a href="/kontakt/" class="o-nav__link">Kontakt</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main class="o-main">
+        <div class="c-intro">
+            <h1 class="c-intro__heading">
+                <span class="c-intro__name">{{ .Params.intro.heading }}</span>
+                <span class="c-intro__motto">{{ .Params.intro.motto | safeHTML }}</span>
+            </h1>
+            <a href="{{ .Params.mobilearrow.link }}" class="c-intro__arrow">
+                <span class="sr-only">{{ .Params.mobilearrow.text }}</span>
+            </a>
+        </div>
+        {{ block "content" . }}{{ end }}
+    </main>
+    <footer class="o-footer">
+        &copy; 2020 Chciples.cz<br><small>Děkujeme <a href="https://github.com/djaiss/mapsicon">Regisu Freydovi</a> za mapu ČR.</small>
+    </footer>
+    <script src="/js/jquery.min.js"></script>
+</body>
+</html>

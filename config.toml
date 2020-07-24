@@ -1,0 +1,8 @@
+baseURL = "https://chciples.cz/"
+languageCode = "cs"
+title = "Chciples.cz"
+
+[params]
+    lang = "cs"
+    locale = "cs_CZ"
+    gatag = "UA-53675598-6"

@@ -1,0 +1,12 @@
+{{ define "content" }}
+    {{ if .Params.main }}
+        <section id="main" class="c-text-down c-text-down--bg-{{ .Params.main.image }}">
+            <div class="c-text-down__content">
+                <h2 class="c-text-down__heading">{{ .Params.main.heading }}</h2>
+                <p class="c-text-down__text">{{ .Params.main.text | safeHTML }}
+                </p>
+                <a href="{{ .Params.main.button.link }}" class="c-text-down__link">{{ .Params.main.button.text }}</a>
+            </div>
+        </section>
+    {{ end }}
+{{ end }}
