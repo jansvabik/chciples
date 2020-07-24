@@ -10,12 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{ hugo.Generator }}
     <title>{{ .Params.seo.title }}</title>
-    <link rel="canonical" href="{{ .Permalink }}">
+    <link rel="canonical" href="{{ .Site.Params.siteURL }}{{ .Permalink }}">
     <meta property="og:title" content="{{ .Params.seo.title }}">
     <meta name="description" content="{{ .Params.seo.description }}">
     <meta property="og:description" content="{{ .Params.seo.description }}">
     <meta property="og:locale" content="{{ .Site.Params.locale }}">
-    <meta property="og:url" content="{{ .Permalink }}">
+    <meta property="og:url" content="{{ .Site.Params.siteURL }}{{ .Permalink }}">
     <meta property="og:type" content="{{ .Params.seo.type }}">
     <meta property="og:site_name" content="{{ .Site.Title }}">
     <link rel="apple-touch-icon" sizes="57x57" href="/images/favicon/apple-icon-57x57.png">

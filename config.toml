@@ -3,6 +3,7 @@ languageCode = "cs"
 title = "Chciples.cz"
 
 [params]
+    siteURL = "https://chciples.cz"
     lang = "cs"
     locale = "cs_CZ"
     gatag = "UA-53675598-6"
