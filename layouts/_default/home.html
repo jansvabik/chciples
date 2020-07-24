@@ -46,3 +46,30 @@
         </p>
     </section>
 {{ end }}
+{{ define "scripts" }}
+<script>
+    $(document).ready(function () {
+        // mobile navigation toggle button
+        $('#mobile-nav-button').click(function () {
+            $('.o-nav').fadeToggle();
+        });
+
+        // the list of prom types and the start index
+        var list = [{{ range .Params.promtypes }}{{ . }}, {{ end }}];
+        var current = 0;
+
+        // change the prom type every three seconds
+        setInterval(function () {
+            // increment the index, if greater than list length, change to zero
+            if (++current > list.length-1) {
+                current = 0;
+            }
+
+            // fade out the current text, change the content and fade in the updated element
+            $('.js-promtype-generator').fadeOut(function () {
+                $('.js-promtype-generator').text(list[current]).fadeIn();
+            });
+        }, 3000);
+    });
+</script>
+{{ end }}

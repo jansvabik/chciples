@@ -16,6 +16,14 @@ mobilearrow:
 intro:
   heading: 'Chci ples!'
   motto: 'Organizace <span class="c-intro__promtype js-promtype-generator">výjimečných</span> plesů v ČR.'
+promtypes:
+  - výjimečných
+  - maturitních
+  - významných
+  - firemních
+  - reprezentačních
+  - komerčních
+  - soukromých
 reasons:
   heading: 'Volnost, výběr, zkušenosti'
   boxes:
