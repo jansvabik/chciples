@@ -49,11 +49,6 @@
 {{ define "scripts" }}
 <script>
     $(document).ready(function () {
-        // mobile navigation toggle button
-        $('#mobile-nav-button').click(function () {
-            $('.o-nav').fadeToggle();
-        });
-
         // the list of prom types and the start index
         var list = [{{ range .Params.promtypes }}{{ . }}, {{ end }}];
         var current = 0;
