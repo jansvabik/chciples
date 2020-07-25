@@ -19,7 +19,7 @@ intro:
 main: 
   image: moderator
   heading: Moderátor nad zlato.
-  text: <p>Kvalitní moderátor je důležitým prvkem každého plesu. Hned vedle [kapely](/na-ples/kapela/) s ním návštěvníci nejvíce interagují. Moderátorova tvář a hlas všechny po celý večer provádí. Musí umět podat vše tak, aby jej návštěvníci plesu sami chtěli poslouchat</p>
+  text: <p>Kvalitní moderátor je důležitým prvkem každého plesu. Hned vedle <a href="/na-ples/kapela/">kapely</a> s ním návštěvníci nejvíce interagují. Moderátorova tvář a hlas všechny po celý večer provádí. Musí umět podat vše tak, aby jej návštěvníci plesu sami chtěli poslouchat</p>
   button:
     text: Poptat moderátora na ples
     link: /#poptavka
