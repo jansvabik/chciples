@@ -1,4 +1,4 @@
-baseURL = "/"
+baseURL = "https://chciples.cz"
 languageCode = "cs"
 title = "Chciples.cz"
 
@@ -7,6 +7,8 @@ title = "Chciples.cz"
     lang = "cs"
     locale = "cs_CZ"
     gatag = "UA-53675598-6"
+[params.seo]
+    image = "/images/og-image.jpg"
 
 [menu]
     [[menu.main]]
