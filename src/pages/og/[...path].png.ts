@@ -22,10 +22,30 @@ type SatoriFonts = Parameters<typeof satori>[1]['fonts'];
 const fonts: SatoriFonts = (() => {
 	const read = (f: string) => readFileSync(`src/assets/fonts/${f}`);
 	return [
-		{ name: 'Montserrat', data: read('montserrat-latin-400-normal.woff'), weight: 400, style: 'normal' },
-		{ name: 'Montserrat', data: read('montserrat-latin-700-normal.woff'), weight: 700, style: 'normal' },
-		{ name: 'MontserratExt', data: read('montserrat-latin-ext-400-normal.woff'), weight: 400, style: 'normal' },
-		{ name: 'MontserratExt', data: read('montserrat-latin-ext-700-normal.woff'), weight: 700, style: 'normal' },
+		{
+			name: 'Montserrat',
+			data: read('montserrat-latin-400-normal.woff'),
+			weight: 400,
+			style: 'normal',
+		},
+		{
+			name: 'Montserrat',
+			data: read('montserrat-latin-700-normal.woff'),
+			weight: 700,
+			style: 'normal',
+		},
+		{
+			name: 'MontserratExt',
+			data: read('montserrat-latin-ext-400-normal.woff'),
+			weight: 400,
+			style: 'normal',
+		},
+		{
+			name: 'MontserratExt',
+			data: read('montserrat-latin-ext-700-normal.woff'),
+			weight: 700,
+			style: 'normal',
+		},
 	];
 })();
 
@@ -46,7 +66,10 @@ const logo = await (async () => {
 const heroPhoto = await (async () => {
 	try {
 		const buf = readFileSync('src/assets/images/c-intro__prom--optimized.jpg');
-		const out = await sharp(buf).resize(1200, 630, { fit: 'cover' }).jpeg({ quality: 72 }).toBuffer();
+		const out = await sharp(buf)
+			.resize(1200, 630, { fit: 'cover' })
+			.jpeg({ quality: 72 })
+			.toBuffer();
 		return `data:image/jpeg;base64,${out.toString('base64')}`;
 	} catch {
 		return null;
@@ -90,7 +113,10 @@ export const GET: APIRoute = async ({ props }) => {
 	const description = stripEmoji((props.description as string) ?? '');
 
 	const logoNode = logo
-		? { type: 'img', props: { src: logo.src, height: 54, width: Math.round(54 * logo.ratio), style: {} } }
+		? {
+				type: 'img',
+				props: { src: logo.src, height: 54, width: Math.round(54 * logo.ratio), style: {} },
+			}
 		: el('div', { fontSize: 38, fontWeight: 700, color: '#ffffff' }, site.name);
 
 	const children: unknown[] = [];
@@ -140,8 +166,8 @@ export const GET: APIRoute = async ({ props }) => {
 				fontWeight: 700,
 				color: 'rgba(255,255,255,0.9)',
 			},
-			SITE_HOST
-		)
+			SITE_HOST,
+		),
 	);
 
 	// Bottom-anchored content: title + white rule + description.
@@ -170,7 +196,7 @@ export const GET: APIRoute = async ({ props }) => {
 						WebkitLineClamp: 3,
 						overflow: 'hidden',
 					},
-					title
+					title,
 				),
 				// signature white rule under the heading
 				el('div', {
@@ -194,11 +220,11 @@ export const GET: APIRoute = async ({ props }) => {
 								WebkitLineClamp: 2,
 								overflow: 'hidden',
 							},
-							description
+							description,
 						)
 					: null,
-			]
-		)
+			],
+		),
 	);
 
 	const tree = el(
@@ -211,7 +237,7 @@ export const GET: APIRoute = async ({ props }) => {
 			backgroundImage: `linear-gradient(150deg, ${BRAND_BLUE} 0%, ${BRAND_PURPLE} 59%)`,
 			fontFamily: 'Montserrat, MontserratExt',
 		},
-		children
+		children,
 	);
 
 	const svg = await satori(tree, { width: 1200, height: 630, fonts });

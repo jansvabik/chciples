@@ -35,9 +35,21 @@ const {
 
 const textHtml = marked.parse(text ?? '', { async: false });
 
+// Inline SVG illustrations (vector, no raster optimization) kept in /images.
+const ILLUSTRATIONS: Record<string, { src: string; alt: string; maxW: string; class: string }> = {
+	cz: { src: '/images/icons/cz.svg', alt: 'Mapa České republiky', maxW: 'max-w-md', class: '' },
+	seating: {
+		src: '/images/seating.svg',
+		alt: 'Interaktivní zasedací pořádek pro online prodej vstupenek',
+		maxW: 'max-w-xl',
+		class: 'drop-shadow-xl',
+	},
+};
+const illo = illustration ? ILLUSTRATIONS[illustration] : undefined;
+
 const photo = getAssetImage(image);
 const collageImages = collage.map((c) => getAssetImage(c)).filter((img) => img !== undefined);
-const hasVisual = collageImages.length > 0 || illustration === 'cz' || Boolean(photo);
+const hasVisual = collageImages.length > 0 || Boolean(illo) || Boolean(photo);
 
 // Desktop column order: image on the requested side.
 const imageOrder = imageSide === 'right' ? 'md:order-2' : 'md:order-1';
@@ -95,11 +107,11 @@ const textOrder = imageSide === 'right' ? 'md:order-1' : 'md:order-2';
 									/>
 								)}
 							</div>
-						) : illustration === 'cz' ? (
+						) : illo ? (
 							<img
-								src="/images/icons/cz.svg"
-								alt="Mapa České republiky"
-								class="mx-auto w-full max-w-md"
+								src={illo.src}
+								alt={illo.alt}
+								class:list={['mx-auto w-full', illo.maxW, illo.class]}
 							/>
 						) : (
 							photo && (

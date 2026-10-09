@@ -56,9 +56,10 @@ const mediaSplitBlock = z.object({
 	// Inline markdown / HTML.
 	text: z.string(),
 	link: z.object({ url: z.string(), text: z.string() }).optional(),
-	// Image path under /images, or an illustration keyword ('cz' = map of ČR).
+	// Image path under /images, or an illustration keyword ('cz' = map of ČR,
+	// 'seating' = interactive seating-plan graphic).
 	image: z.string().optional(),
-	illustration: z.enum(['cz']).optional(),
+	illustration: z.enum(['cz', 'seating']).optional(),
 	// Visual on the left (default) or right of the copy.
 	imageSide: z.enum(['left', 'right']).default('left'),
 	// Tinted (gray) ground vs plain white.
@@ -107,6 +108,9 @@ export const serviceSchema = z.object({
 	weight: z.number(),
 	// Background keyword → /images/c-services__<image>.jpg.
 	image: z.string(),
+	// Optional SVG illustration (basename under /images) shown on the card
+	// instead of the photo — e.g. 'seating' for the online-ticketing service.
+	illustration: z.string().optional(),
 	heading: z.string(),
 	text: z.string(),
 	// Keep the page (and its Service structured data) but leave it out of the

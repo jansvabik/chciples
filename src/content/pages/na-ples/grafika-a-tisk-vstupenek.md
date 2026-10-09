@@ -18,7 +18,7 @@ blocks:
   - _component: media-split
     anchor: 'main'
     heading: 'Design a vstupenky na ples.'
-    text: 'Pro váš ples vytvoříme unikátní, i&nbsp;tematickou, grafiku vstupenek včetně jejich tisku nebo online systém pro jejich nákup, správu a&nbsp;distribuci. Je na vás, kterou metodu upřednostňujete. Každá má své výhody a&nbsp;nevýhody, pro více informací se nám ozvěte!'
+    text: 'Pro váš ples vytvoříme unikátní, i&nbsp;tematickou, grafiku vstupenek včetně jejich tisku. Chcete-li vstupenky i&nbsp;prodávat, zajistíme vám [online prodej a&nbsp;správu vstupenek](/na-ples/vstupenkovy-system/). Je na vás, kterou metodu upřednostňujete – pro více informací se nám ozvěte!'
     image: 'c-services__tickets.jpg'
     link:
       url: '/#poptavka'
