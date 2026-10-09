@@ -1,0 +1,35 @@
+{
+	"name": "chciples-website",
+	"type": "module",
+	"version": "2.0.0",
+	"private": true,
+	"packageManager": "pnpm@10.23.0",
+	"scripts": {
+		"dev": "astro dev --host",
+		"start": "astro dev",
+		"build": "git fetch --unshallow --quiet 2>/dev/null || true; astro build",
+		"preview": "astro preview",
+		"astro": "astro",
+		"check": "astro check",
+		"format": "prettier --write --list-different .",
+		"lint": "prettier --check ."
+	},
+	"dependencies": {
+		"@astrojs/sitemap": "^3.7.2",
+		"@astrojs/svelte": "^8.0.5",
+		"@tailwindcss/vite": "^4.3.0",
+		"astro": "6.4.7",
+		"marked": "^18.0.0",
+		"satori": "^0.29.0",
+		"sharp": "^0.35.1",
+		"svelte": "^5.55.5",
+		"tailwindcss": "^4.3.0"
+	},
+	"devDependencies": {
+		"@astrojs/check": "^0.9.9",
+		"prettier": "^3.5.3",
+		"prettier-plugin-astro": "^0.14.1",
+		"prettier-plugin-svelte": "^3.5.1",
+		"typescript": "^5.9.3"
+	}
+}

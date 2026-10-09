@@ -1,0 +1,47 @@
+---
+/**
+ * Resolves frontmatter blocks (each with a `_component` discriminator) to the
+ * corresponding Astro component under `src/components/blocks/<name>.astro`.
+ *
+ * Build-time `import.meta.glob` collects every block component once; the
+ * registry maps block name -> component. Block name is derived from the file
+ * name: `blocks/media-split.astro` -> `"media-split"`.
+ */
+import type { Block } from './schemas';
+
+interface Props {
+	blocks: Block[];
+}
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+const modules = import.meta.glob<{ default: any }>('../components/blocks/*.astro', {
+	eager: true,
+});
+
+const registry: Record<string, any> = {};
+for (const [path, mod] of Object.entries(modules)) {
+	const match = path.match(/\/blocks\/([^/]+)\.astro$/);
+	if (!match) continue;
+	registry[match[1]!] = mod.default;
+}
+
+const { blocks } = Astro.props;
+---
+
+{
+	blocks.map((block, index) => {
+		const Component = registry[block._component];
+		if (!Component) {
+			if (import.meta.env.DEV) {
+				return (
+					<div class="border border-red-400 bg-red-50 px-4 py-3 text-sm text-red-700">
+						Unknown block: <code>{block._component}</code>
+					</div>
+				);
+			}
+			return null;
+		}
+		// `first` lets the hero know it sits at the very top (full-height intro).
+		return <Component {...block} first={index === 0} />;
+	})
+}

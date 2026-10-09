@@ -1,0 +1,42 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import BlockRenderer from '../lib/BlockRenderer.astro';
+import { buildGraph } from '../lib/jsonld';
+import { applyCzechTypography, typographyDeep } from '../lib/typography';
+
+export async function getStaticPaths() {
+	const pages = await getCollection('pages');
+	// 'index' → '' (home); 'na-ples/dj' → 'na-ples/dj'.
+	const slugOf = (id: string): string => id.replace(/\/?index$/, '');
+	return pages.map((page) => ({
+		params: { slug: slugOf(page.id) },
+		props: { page },
+	}));
+}
+
+interface Props {
+	page: CollectionEntry<'pages'>;
+}
+
+const { page } = Astro.props;
+const { title, seo, service, blocks: rawBlocks } = page.data;
+
+// Czech typographic pass so short words never orphan at line ends.
+const blocks = typographyDeep(rawBlocks, applyCzechTypography);
+
+// Per-page generated OG image (src/pages/og/[...path].png.ts keyed by page id).
+const ogImage = `/og/${page.id}.png`;
+
+const jsonLd = buildGraph({
+	pathname: Astro.url.pathname,
+	title,
+	description: seo?.description ?? '',
+	isService: Boolean(service),
+	serviceName: seo?.title ?? title,
+});
+---
+
+<Layout {title} {seo} {jsonLd} {ogImage}>
+	<BlockRenderer {blocks} />
+</Layout>

@@ -1,0 +1,26 @@
+---
+/** Closing call to action / inquiry block (heading + inline-markdown copy). */
+import { marked } from 'marked';
+import Container from '../Container.astro';
+
+interface Props {
+	anchor?: string;
+	heading: string;
+	text: string;
+}
+
+const { anchor, heading, text } = Astro.props;
+const textHtml = marked.parse(text ?? '', { async: false });
+---
+
+<section id={anchor} class="scroll-mt-24 py-16">
+	<Container>
+		<h2 class="heading-rule mb-8 text-center text-[2.3rem] font-semibold text-brand">
+			{heading}
+		</h2>
+		<div
+			class="prose-links mx-auto max-w-2xl text-center text-lg leading-relaxed"
+			set:html={textHtml}
+		/>
+	</Container>
+</section>

@@ -1,0 +1,120 @@
+---
+/**
+ * Text beside a visual. Covers the homepage "last prom" collage, the "all of
+ * ČR" map section, and each service page's text + photo section. The visual can
+ * be a single optimized photo, an overlapping photo collage, or the CZ map SVG.
+ */
+import { marked } from 'marked';
+import { Image } from 'astro:assets';
+import Container from '../Container.astro';
+import { getAssetImage } from '../../lib/assetImages';
+
+interface Props {
+	anchor?: string;
+	heading: string;
+	text: string;
+	link?: { url: string; text: string };
+	image?: string;
+	illustration?: 'cz';
+	imageSide?: 'left' | 'right';
+	tinted?: boolean;
+	collage?: string[];
+}
+
+const {
+	anchor,
+	heading,
+	text,
+	link,
+	image,
+	illustration,
+	imageSide = 'left',
+	tinted = false,
+	collage = [],
+} = Astro.props;
+
+const textHtml = marked.parse(text ?? '', { async: false });
+
+const photo = getAssetImage(image);
+const collageImages = collage.map((c) => getAssetImage(c)).filter((img) => img !== undefined);
+const hasVisual = collageImages.length > 0 || illustration === 'cz' || Boolean(photo);
+
+// Desktop column order: image on the requested side.
+const imageOrder = imageSide === 'right' ? 'md:order-2' : 'md:order-1';
+const textOrder = imageSide === 'right' ? 'md:order-1' : 'md:order-2';
+---
+
+<section id={anchor} class:list={[tinted && 'bg-gray-100', 'scroll-mt-24 py-16 md:py-24']}>
+	<Container>
+		<div class:list={['grid items-center gap-10 md:gap-16', hasVisual && 'md:grid-cols-2']}>
+			<div class:list={[hasVisual ? textOrder : 'max-w-3xl']}>
+				<h2 class="mb-5 font-semibold text-brand md:text-[2.3rem]">{heading}</h2>
+				{
+					textHtml && (
+						<div class="prose-links space-y-4 text-lg leading-relaxed" set:html={textHtml} />
+					)
+				}
+				{
+					link && (
+						<a
+							href={link.url}
+							class="mt-6 flex items-center font-medium text-brand hover:opacity-80"
+						>
+							<img
+								src="/images/icons/arrow.svg"
+								alt=""
+								width="56"
+								height="56"
+								class="mr-5 h-14 w-14"
+							/>
+							{link.text}
+						</a>
+					)
+				}
+			</div>
+
+			{
+				hasVisual && (
+					<div class:list={[imageOrder]}>
+						{collageImages.length > 0 ? (
+							<div class="relative mx-auto aspect-[4/5] max-w-md">
+								<Image
+									src={collageImages[0]!}
+									alt=""
+									widths={[300, 480]}
+									sizes="(min-width: 768px) 24rem, 60vw"
+									class="absolute top-0 left-0 w-[62%] rounded shadow-xl"
+								/>
+								{collageImages[1] && (
+									<Image
+										src={collageImages[1]!}
+										alt=""
+										widths={[300, 480]}
+										sizes="(min-width: 768px) 24rem, 60vw"
+										class="absolute right-0 bottom-0 w-[62%] rounded shadow-xl ring-4 ring-gray-100"
+									/>
+								)}
+							</div>
+						) : illustration === 'cz' ? (
+							<img
+								src="/images/icons/cz.svg"
+								alt="Mapa České republiky"
+								class="mx-auto w-full max-w-md"
+							/>
+						) : (
+							photo && (
+								<Image
+									src={photo}
+									alt={heading}
+									widths={[480, 768, 1024]}
+									sizes="(min-width: 768px) 50vw, 100vw"
+									class="mx-auto w-full rounded shadow-lg"
+								/>
+							)
+						)}
+					</div>
+				)
+			}
+		</div>
+	</Container>
+</section>

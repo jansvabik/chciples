@@ -1,0 +1,8 @@
+# Force UTF-8 on the plain-text endpoints. Their bytes are UTF-8, but a bare
+# `text/plain` (no charset) makes browsers guess the encoding — which mangles
+# the Czech diacritics (á/č/ř/ž…) into mojibake. robots.txt is ASCII but listed
+# for consistency.
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+/robots.txt
+  Content-Type: text/plain; charset=utf-8

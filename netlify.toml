@@ -1,8 +1,9 @@
 [build]
-publish = "public"
-command = "hugo --gc --minify"
+publish = "dist"
+command = "pnpm build"
 
-[context.production.environment]
-HUGO_VERSION = "0.74.2"
-HUGO_ENV = "production"
-HUGO_ENABLEGITINFO = "true"
+[build.environment]
+NODE_VERSION = "22"
+# `git fetch --unshallow` in the build script needs full history for accurate
+# sitemap <lastmod> dates.
+GIT_DEPTH = "0"

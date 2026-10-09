@@ -1,2 +1,14 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# generated
+.DS_Store
 *.DS_Store
-public/
+
+# environment
+.env
+.env.production

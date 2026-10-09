@@ -1,0 +1,121 @@
+@import 'tailwindcss';
+
+/*
+ * Tailwind v4 theme for Chciples.cz. The brand is a blue→purple gradient
+ * (150deg, #0055ff → #7700ff) with a single solid accent (#4539ff) used for
+ * links, headings and rules. Montserrat with tight tracking, ported from the
+ * old hand-written stylesheet. CSS-first — no tailwind.config.js.
+ */
+@theme {
+	--font-sans: var(--font-montserrat), 'Montserrat', Arial, Helvetica, sans-serif;
+
+	/* Brand */
+	--color-brand: #4539ff;
+	--color-brand-blue: #0055ff;
+	--color-brand-purple: #7700ff;
+
+	/* Neutrals pinned to Tailwind v3 hex (v4's lighter OKLCH grays read too
+	   pale for body copy here). */
+	--color-gray-100: #f3f4f6;
+	--color-gray-200: #e5e7eb;
+	--color-gray-300: #d1d5db;
+	--color-gray-500: #6b7280;
+	--color-gray-700: #374151;
+	--color-gray-900: #111827;
+}
+
+@layer base {
+	*,
+	::after,
+	::before {
+		border-color: var(--color-gray-200, currentColor);
+	}
+
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		font-family: var(--font-sans);
+		letter-spacing: -0.03em;
+		color: #000;
+		background: #fff;
+	}
+
+	button:not(:disabled),
+	[role='button'] {
+		cursor: pointer;
+	}
+
+	/* Inline prose links inside block copy — brand underline that clears on
+	   hover, matching the old `p a` treatment. */
+	.prose-links a {
+		color: var(--color-brand);
+		text-decoration: none;
+		border-bottom: 1px solid var(--color-brand);
+	}
+	.prose-links a:hover {
+		border-bottom-color: transparent;
+	}
+}
+
+/* The signature blue→purple diagonal gradient. */
+@utility bg-brand-gradient {
+	background-image: linear-gradient(
+		150deg,
+		var(--color-brand-blue) 0%,
+		var(--color-brand-purple) 59%
+	);
+}
+
+/* Same gradient clipped to text (used for the rotating word in the hero). */
+@utility text-brand-gradient {
+	background-image: linear-gradient(
+		150deg,
+		var(--color-brand-blue) 0%,
+		var(--color-brand-purple) 59%
+	);
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
+}
+
+/* Translucent brand gradient laid over the hero photo. */
+.hero-overlay {
+	background-image: linear-gradient(
+		150deg,
+		rgba(0, 85, 255, 0.75) 0%,
+		rgba(119, 0, 255, 0.75) 59%
+	);
+}
+
+/* Shared page container. */
+.site-container {
+	width: 100%;
+	max-width: 80rem;
+	margin: 0 auto;
+	padding: 0 1.5rem;
+}
+
+/* The short rule under section headings (gradient pill). */
+.heading-rule::after {
+	content: '';
+	display: block;
+	height: 4px;
+	width: 8rem;
+	border-radius: 9999px;
+	margin: 1rem auto 0 auto;
+	background-image: linear-gradient(
+		150deg,
+		var(--color-brand-blue) 0%,
+		var(--color-brand-purple) 59%
+	);
+}
+
+/* The rotating hero word fades between values (JS swaps textContent). */
+.rotate-word {
+	transition: opacity 0.35s ease;
+}
+.rotate-word.is-out {
+	opacity: 0;
+}

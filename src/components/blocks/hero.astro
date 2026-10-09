@@ -1,0 +1,107 @@
+---
+/**
+ * Full-bleed gradient intro at the top of every page. The brand gradient is
+ * laid over a photo; the header overlays it. When `motto` contains the token
+ * `{rotate}` and `rotateWords` is set, that word animates through the list.
+ */
+import { Image } from 'astro:assets';
+import { getAssetImage } from '../../lib/assetImages';
+
+interface Props {
+	heading: string;
+	motto: string;
+	rotateWords?: string[];
+	arrowTo?: string;
+	arrowText?: string;
+	smaller?: boolean;
+	first?: boolean;
+}
+
+const { heading, motto, rotateWords = [], arrowTo, arrowText, smaller = false } = Astro.props;
+
+const hasRotate = rotateWords.length > 0 && motto.includes('{rotate}');
+const [mottoBefore, mottoAfter] = hasRotate ? motto.split('{rotate}') : [motto, ''];
+
+const bg = getAssetImage('c-intro__prom--optimized');
+---
+
+<section
+	class="relative flex min-h-screen flex-col justify-center overflow-hidden px-8 py-20 text-white md:min-h-[85vh] md:justify-end md:px-24 md:py-20"
+>
+	<!-- optimized background photo + translucent brand gradient on top -->
+	{
+		bg && (
+			<Image
+				src={bg}
+				alt=""
+				widths={[768, 1280, 1920]}
+				sizes="100vw"
+				loading="eager"
+				fetchpriority="high"
+				class="absolute inset-0 -z-20 h-full w-full object-cover"
+			/>
+		)
+	}
+	<div class="hero-overlay absolute inset-0 -z-10"></div>
+
+	<h1 class="w-full text-center text-3xl font-normal md:text-left md:text-[2.5rem]">
+		<span
+			class:list={[
+				'block font-bold leading-none',
+				smaller ? 'text-6xl md:text-[5rem]' : 'text-6xl md:text-[7rem]',
+			]}>{heading}</span
+		>
+		<span class="mt-4 block md:mt-6">
+			{mottoBefore}{
+				hasRotate && (
+					<span class="rotate-word inline-block" data-rotate={JSON.stringify(rotateWords)}>
+						{rotateWords[0]}
+					</span>
+				)
+			}{mottoAfter}
+		</span>
+	</h1>
+
+	<!-- short white rule under the heading -->
+	<span class="mx-auto mt-8 block h-1 w-1/3 rounded bg-white md:mx-0 md:mt-10 md:w-[10%]"></span>
+
+	{
+		arrowTo && (
+			<a
+				href={arrowTo}
+				class="mx-auto mt-16 block h-16 w-16 bg-contain bg-center bg-no-repeat md:hidden"
+				style="background-image: url('/images/arrow-down.svg');"
+			>
+				<span class="sr-only">{arrowText ?? 'Posunout dolů'}</span>
+			</a>
+		)
+	}
+</section>
+
+<script>
+	// Rotate the hero word every 3s with a fade. No-ops when the page has no
+	// rotating word. Re-attached on each view transition (astro:page-load fires
+	// on first load too).
+	function startRotator() {
+		const el = document.querySelector('.rotate-word[data-rotate]');
+		if (!(el instanceof HTMLElement) || el.dataset.rotating) return;
+		let words = [];
+		try {
+			words = JSON.parse(el.dataset.rotate || '[]');
+		} catch {
+			return;
+		}
+		if (words.length < 2) return;
+		el.dataset.rotating = '1';
+		let i = 0;
+		setInterval(() => {
+			el.classList.add('is-out');
+			setTimeout(() => {
+				i = (i + 1) % words.length;
+				el.textContent = words[i] ?? '';
+				el.classList.remove('is-out');
+			}, 350);
+		}, 3000);
+	}
+	document.addEventListener('astro:page-load', startRotator);
+</script>

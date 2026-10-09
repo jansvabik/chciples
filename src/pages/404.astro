@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Container from '../components/Container.astro';
+
+const seo = { title: 'Stránka nenalezena — Chciples.cz', robots: 'noindex' };
+---
+
+<Layout title="Stránka nenalezena" {seo}>
+	<section
+		class="relative flex min-h-screen items-center justify-center bg-brand-gradient px-6 text-center text-white"
+	>
+		<Container>
+			<p class="text-7xl font-bold md:text-9xl">404</p>
+			<h1 class="mt-4 text-2xl font-light md:text-3xl">Tuhle stránku jsme nenašli.</h1>
+			<a
+				href="/"
+				class="mt-10 inline-block border-b border-white pb-1 text-lg hover:border-transparent"
+			>
+				Zpět na úvodní stránku →
+			</a>
+		</Container>
+	</section>
+</Layout>

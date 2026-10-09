@@ -1,0 +1,49 @@
+---
+/** "Why us" — a row of icon boxes with a gradient-underlined section heading. */
+import Container from '../Container.astro';
+
+interface Props {
+	heading: string;
+	boxes: {
+		icon: 'beer' | 'party' | 'marketing';
+		heading: string;
+		text: string;
+		link?: { url: string; text: string };
+	}[];
+}
+
+const { heading, boxes } = Astro.props;
+---
+
+<section id="reasons" class="py-16">
+	<Container>
+		<h2 class="heading-rule mb-8 text-center text-[2.3rem] font-semibold text-brand">
+			{heading}
+		</h2>
+		<div class="grid gap-8 md:grid-cols-3 md:items-stretch">
+			{
+				boxes.map((box) => (
+					<div class="bg-white px-6 py-10 text-center text-brand">
+						<img
+							src={`/images/icons/${box.icon}.svg`}
+							alt=""
+							width="48"
+							height="48"
+							class="mx-auto mb-6 h-12 w-12"
+						/>
+						<h3 class="mb-2 font-semibold">{box.heading}</h3>
+						<p class="mb-4 text-lg">{box.text}</p>
+						{box.link && (
+							<a
+								href={box.link.url}
+								class="inline-block border-b border-brand text-lg hover:border-transparent"
+							>
+								{box.link.text} →
+							</a>
+						)}
+					</div>
+				))
+			}
+		</div>
+	</Container>
+</section>
